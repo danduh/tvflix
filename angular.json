@@ -1,6 +1,58 @@
 {
   "version": 1,
   "projects": {
+    "movies-ms": {
+      "root": "apps/movies-ms",
+      "sourceRoot": "apps/movies-ms/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/movies-ms",
+            "main": "apps/movies-ms/src/main.ts",
+            "tsConfig": "apps/movies-ms/tsconfig.app.json",
+            "assets": ["apps/movies-ms/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/movies-ms/src/environments/environment.ts",
+                  "with": "apps/movies-ms/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "movies-ms:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/movies-ms/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/movies-ms"],
+          "options": {
+            "jestConfig": "apps/movies-ms/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "tvflix": {
       "projectType": "application",
       "root": "apps/tvflix",
