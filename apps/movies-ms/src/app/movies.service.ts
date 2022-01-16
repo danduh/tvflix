@@ -12,6 +12,6 @@ export class MoviesService {
   }
 
   getList(listQuery): Observable<any> {
-    return this.db.getList(listQuery);
+    return this.db.getMoviesList(listQuery);
   }
 }

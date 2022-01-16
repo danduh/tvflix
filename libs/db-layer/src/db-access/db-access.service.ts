@@ -18,27 +18,76 @@ export class DbAccessService {
       .pipe(
         map((resp) => resp.data),
         catchError((err) => {
-          console.error(err);
           return of(err)
         })
       )
   }
 
-  getList(listQuery) {
+  getMoviesList(listQuery) {
     const listType = listQuery?.listType;
     const option = {
       params: { 'api_key': this.apiKey, ...listQuery },
     }
     return this.httpService.get(`${this.baseUrl}movie/${listType}`, option)
       .pipe(
-        map((resp) => {
-          return resp.data
-        }),
+        map((resp) => resp.data),
         catchError((err) => {
-          // console.error(err);
           return of(err)
         })
       )
   }
 
+  getTvsList(listQuery) {
+    const listType = listQuery?.listType;
+    const option = {
+      params: { 'api_key': this.apiKey, ...listQuery },
+    }
+    return this.httpService.get(`${this.baseUrl}tv/${listType}`, option)
+      .pipe(
+        map((resp) => resp.data),
+        catchError((err) => {
+          console.log(err)
+          return of(err)
+        })
+      )
+  }
+
+
+  getTvsShow(id) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}tv/${id}`, option)
+      .pipe(
+        map((resp) => resp.data),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
+
+  getTvShowSeason(id, season_number) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}tv/${id}/season/${season_number}`, option)
+      .pipe(
+        map((resp) => resp.data),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
+  getTvShowSeasonImages(id, season_number) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}tv/${id}/season/${season_number}/images`, option)
+      .pipe(
+        map((resp) => resp.data),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
 }
