@@ -1,13 +1,20 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
-import { AppService } from './app.service';
+import { MoviesService } from './movies.service';
+import { ApiParam, ApiResponse } from "@nestjs/swagger";
+import { Observable } from "rxjs";
+import { MovieDto } from "../dtos/movie.dto";
 
-@Controller()
+
+@Controller('movies')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: MoviesService) {
+  }
 
-  @Get()
-  getData() {
-    return this.appService.getData();
+  @Get(':id')
+  @ApiResponse({ status: 201, type: MovieDto, description: 'Get Movie Details' })
+  @ApiParam({ name: 'id' })
+  getMovie(@Param('id') id): Observable<MovieDto> {
+    return this.appService.getById(id);
   }
 }

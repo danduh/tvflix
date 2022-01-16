@@ -1,6 +1,35 @@
 {
   "version": 1,
   "projects": {
+    "db-layer": {
+      "root": "libs/db-layer",
+      "sourceRoot": "libs/db-layer/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/db-layer/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/db-layer"
+          ],
+          "options": {
+            "jestConfig": "libs/db-layer/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "movies-ms": {
       "root": "apps/movies-ms",
       "sourceRoot": "apps/movies-ms/src",
@@ -8,12 +37,27 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/movies-ms",
             "main": "apps/movies-ms/src/main.ts",
+            "tsPlugins": [
+              {
+                "name": "@nestjs/swagger/plugin",
+                "options": {
+                  "dtoFileNameSuffix": [
+                    ".dto.ts",
+                    ".vm.ts"
+                  ]
+                }
+              }
+            ],
             "tsConfig": "apps/movies-ms/tsconfig.app.json",
-            "assets": ["apps/movies-ms/src/assets"]
+            "assets": [
+              "apps/movies-ms/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -37,14 +81,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/movies-ms/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/movies-ms/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/movies-ms"],
+          "outputs": [
+            "coverage/apps/movies-ms"
+          ],
           "options": {
             "jestConfig": "apps/movies-ms/jest.config.js",
             "passWithNoTests": true
@@ -61,7 +111,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/tvflix",
             "index": "apps/tvflix/src/index.html",
@@ -69,8 +121,13 @@
             "polyfills": "apps/tvflix/src/polyfills.ts",
             "tsConfig": "apps/tvflix/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/tvflix/src/favicon.ico", "apps/tvflix/src/assets"],
-            "styles": ["apps/tvflix/src/styles.scss"],
+            "assets": [
+              "apps/tvflix/src/favicon.ico",
+              "apps/tvflix/src/assets"
+            ],
+            "styles": [
+              "apps/tvflix/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -135,7 +192,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tvflix"],
+          "outputs": [
+            "coverage/apps/tvflix"
+          ],
           "options": {
             "jestConfig": "apps/tvflix/jest.config.js",
             "passWithNoTests": true
@@ -163,14 +222,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/tvflix-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/tvflix-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["tvflix"]
+      "implicitDependencies": [
+        "tvflix"
+      ]
     }
   }
 }

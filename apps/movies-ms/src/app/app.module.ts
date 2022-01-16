@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MoviesService } from './movies.service';
+import { DbLayerModule } from "@tvflix/db-layer";
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    DbLayerModule
+  ],
+  controllers: [
+    AppController
+  ],
+  providers: [
+    MoviesService
+  ],
 })
-export class AppModule {}
+export class AppModule {
+}
