@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
+import { MoviesController } from './moviesController';
 import { MoviesService } from './movies.service';
 import { DbLayerModule } from "@tvflix/db-layer";
 
@@ -9,7 +9,7 @@ import { DbLayerModule } from "@tvflix/db-layer";
     DbLayerModule
   ],
   controllers: [
-    AppController
+    MoviesController
   ],
   providers: [
     MoviesService

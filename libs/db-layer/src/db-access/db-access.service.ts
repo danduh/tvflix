@@ -24,4 +24,21 @@ export class DbAccessService {
       )
   }
 
+  getList(listQuery) {
+    const listType = listQuery?.listType;
+    const option = {
+      params: { 'api_key': this.apiKey, ...listQuery },
+    }
+    return this.httpService.get(`${this.baseUrl}movie/${listType}`, option)
+      .pipe(
+        map((resp) => {
+          return resp.data
+        }),
+        catchError((err) => {
+          // console.error(err);
+          return of(err)
+        })
+      )
+  }
+
 }

@@ -10,4 +10,8 @@ export class MoviesService {
   getById(id: string): Observable<any> {
     return this.db.getMovies(id);
   }
+
+  getList(listQuery): Observable<any> {
+    return this.db.getList(listQuery);
+  }
 }
