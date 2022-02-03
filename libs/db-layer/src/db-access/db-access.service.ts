@@ -138,4 +138,25 @@ export class DbAccessService {
         })
       )
   }
+
+  getCastCredits(id) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}person/${id}/movie_credits`, option)
+      .pipe(
+        map((resp) => {
+          console.log(resp.data)
+          return {
+            ...resp.data,
+            cast: resp.data.cast.map(camelCase)
+          }
+        }),
+        map(camelCase),
+        tap(console.log),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
 }

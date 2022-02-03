@@ -24,4 +24,10 @@ export class AppController {
     console.log(data)
     return this.appService.getPersonImages(data.id);
   }
+
+  @GrpcMethod('CastService', 'GetPersonCredits')
+  getOnePersonCredits(data: PersonParamById, metadata: Metadata, call: ServerUnaryCall<any, any>) {
+    console.log(data)
+    return this.appService.getPersonCredits(data.id);
+  }
 }

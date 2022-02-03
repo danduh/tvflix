@@ -9,7 +9,12 @@ export class AppService {
   getPersonData(id: number) {
     return this.db.getCast(id);
   }
+
   getPersonImages(id: number) {
     return this.db.getCastImages(id);
+  }
+
+  getPersonCredits(id: number) {
+    return this.db.getCastCredits(id);
   }
 }

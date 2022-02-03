@@ -14,6 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.GRPC,
     options: {
+      url: 'localhost:5000',
       package: 'cast',
       protoPath: join(__dirname, 'assets/proto/cast.proto'),
     },
