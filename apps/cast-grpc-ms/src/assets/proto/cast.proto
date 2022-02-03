@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package cast;
+
+// @GrpcMethod('CastService', 'GetOnePerson')
+// @GrpcMethod('CastService', 'GetPersonImages')
+service CastService {
+  rpc GetOnePerson (PersonID) returns (Person);
+  rpc GetPersonImages (PersonID) returns (PersonImage);
+}
+
+message PersonID {
+  int32 id = 1;
+}
+message PersonImage{
+  int32 id = 2;
+  repeated ImageProfile profiles = 3;
+}
+message Person {
+  int32 id = 1;
+  string name = 4;
+  repeated string alsoKnownAs = 5;
+  string biography = 6;
+  string imdbId = 7;
+  float popularity = 8;
+  string birthday = 9;
+}
+
+message ImageProfile{
+  float aspect_ratio = 10;
+  string file_path = 11;
+  int32 height = 12;
+  float  vote_average = 13;
+  int32 vote_count = 14;
+  int32 width = 15;
+}

@@ -1,6 +1,59 @@
 {
   "version": 1,
   "projects": {
+    "cast-grpc-ms": {
+      "root": "apps/cast-grpc-ms",
+      "sourceRoot": "apps/cast-grpc-ms/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/cast-grpc-ms",
+            "main": "apps/cast-grpc-ms/src/main.ts",
+            "tsConfig": "apps/cast-grpc-ms/tsconfig.app.json",
+            "assets": ["apps/cast-grpc-ms/src/assets/proto"],
+            "watchAssets": true
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/cast-grpc-ms/src/environments/environment.ts",
+                  "with": "apps/cast-grpc-ms/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "cast-grpc-ms:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/cast-grpc-ms/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cast-grpc-ms"],
+          "options": {
+            "jestConfig": "apps/cast-grpc-ms/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "db-layer": {
       "root": "libs/db-layer",
       "sourceRoot": "libs/db-layer/src",

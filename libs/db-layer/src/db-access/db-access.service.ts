@@ -1,6 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from "@nestjs/axios";
-import { catchError, map, of } from "rxjs";
+import { catchError, map, of, tap } from "rxjs";
+
+function camelCase(obj) {
+  const newObj = {};
+  for (const d in obj) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (obj.hasOwnProperty(d)) {
+      newObj[d.replace(/(_\w)/g, function (k) {
+        return k[1].toUpperCase();
+      })] = obj[d];
+    }
+  }
+  return newObj;
+}
 
 @Injectable()
 export class DbAccessService {
@@ -78,6 +91,7 @@ export class DbAccessService {
         })
       )
   }
+
   getTvShowSeasonImages(id, season_number) {
     const option = {
       params: { 'api_key': this.apiKey },
@@ -85,6 +99,40 @@ export class DbAccessService {
     return this.httpService.get(`${this.baseUrl}tv/${id}/season/${season_number}/images`, option)
       .pipe(
         map((resp) => resp.data),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
+
+  getCast(id) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}person/${id}`, option)
+      .pipe(
+        map((resp) => resp.data),
+        map(camelCase),
+        catchError((err) => {
+          return of(err)
+        })
+      )
+  }
+
+  getCastImages(id) {
+    const option = {
+      params: { 'api_key': this.apiKey },
+    }
+    return this.httpService.get(`${this.baseUrl}person/${id}/images`, option)
+      .pipe(
+        map((resp) => {
+          return {
+            ...resp.data,
+            profiles: resp.data.profiles.map(camelCase)
+          }
+        }),
+        map(camelCase),
+        tap(console.log),
         catchError((err) => {
           return of(err)
         })
