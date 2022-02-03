@@ -2,15 +2,13 @@ syntax = "proto3";
 
 package cast;
 
-
-
 service CastService {
   // @GrpcMethod('CastService', 'GetOnePerson')
-  rpc GetOnePerson (PersonID) returns (Person);
+  rpc GetOnePerson (PersonID) returns (Person){};
   // @GrpcMethod('CastService', 'GetPersonImages')
-  rpc GetPersonImages (PersonID) returns (PersonImage);
+  rpc GetPersonImages (PersonID) returns (PersonImage){};
   // @GrpcMethod('CastService', 'GetPersonCredits')
-  rpc GetPersonCredits (PersonID) returns (PersonCredits);
+  rpc GetPersonCredits (PersonID) returns (PersonCredits){};
 }
 
 message PersonID {

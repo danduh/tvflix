@@ -1,6 +1,58 @@
 {
   "version": 1,
   "projects": {
+    "cast-gql": {
+      "root": "apps/cast-gql",
+      "sourceRoot": "apps/cast-gql/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/cast-gql",
+            "main": "apps/cast-gql/src/main.ts",
+            "tsConfig": "apps/cast-gql/tsconfig.app.json",
+            "assets": ["apps/cast-gql/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/cast-gql/src/environments/environment.ts",
+                  "with": "apps/cast-gql/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "cast-gql:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/cast-gql/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cast-gql"],
+          "options": {
+            "jestConfig": "apps/cast-gql/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "cast-grpc-ms": {
       "root": "apps/cast-grpc-ms",
       "sourceRoot": "apps/cast-grpc-ms/src",
@@ -71,6 +123,58 @@
           "outputs": ["coverage/libs/db-layer"],
           "options": {
             "jestConfig": "libs/db-layer/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "gateway-gql": {
+      "root": "apps/gateway-gql",
+      "sourceRoot": "apps/gateway-gql/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/gateway-gql",
+            "main": "apps/gateway-gql/src/main.ts",
+            "tsConfig": "apps/gateway-gql/tsconfig.app.json",
+            "assets": ["apps/gateway-gql/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/gateway-gql/src/environments/environment.ts",
+                  "with": "apps/gateway-gql/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "gateway-gql:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/gateway-gql/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/gateway-gql"],
+          "options": {
+            "jestConfig": "apps/gateway-gql/jest.config.js",
             "passWithNoTests": true
           }
         }
