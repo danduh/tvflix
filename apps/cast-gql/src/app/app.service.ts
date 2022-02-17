@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 
 interface PersonService {
   getOnePerson(data: { id: number }): Observable<any>
+  getPersonImages(data: { id: number }): Observable<any>
+  getPersonCredits(data: { id: number }): Observable<any>
 }
 
 @Injectable()
@@ -19,5 +21,12 @@ export class AppService implements OnModuleInit {
 
   getPersonData(data) {
     return this.personService.getOnePerson(data);
+  }
+
+  getPersonImages(data) {
+    return this.personService.getPersonImages(data);
+  }
+  getPersonCredits(data) {
+    return this.personService.getPersonCredits(data);
   }
 }

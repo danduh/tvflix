@@ -24,7 +24,42 @@ type PersonModel {
   birthday: String!
 }
 
+type PersonImageModel {
+  id: Float!
+  profiles: [ImageProfile!]!
+}
+
+type ImageProfile {
+  aspectRatio: Float!
+  filePath: String!
+  height: Float!
+  voteAverage: Float!
+  voteCount: Float!
+  width: Float!
+}
+
+type PersonCreditsModel {
+  id: Float!
+  cast: [CreditModel!]!
+}
+
+type CreditModel {
+  character: String!
+  creditId: String!
+  releaseDate: String!
+  title: String!
+  id: Float!
+  backdropPath: String!
+  posterPath: String!
+}
+
 type Query {
   """Will return Persona/Cast Details"""
   persona(id: Float!): PersonModel!
+
+  """Will return Persona/Cast Images"""
+  personaImages(id: Float!): PersonImageModel!
+
+  """Will return Persona/Cast Credits"""
+  personaCredits(id: Float!): PersonCreditsModel!
 }
