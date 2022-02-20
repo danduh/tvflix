@@ -16,7 +16,7 @@ spec:
       containers:
         - image: docker.io/danielostrovsky/be-service:latest
           name: movies-ms
-          imagePullPolicy: Always
+#          imagePullPolicy: Always
           env:
             - name: discovery.type
               value: 'single-node'
