@@ -14,7 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.GRPC,
     options: {
-      url: 'localhost:5000',
+      url: `localhost:${process.env.PORT || 5000}`,
       package: 'cast',
       protoPath: join(__dirname, 'assets/proto/cast.proto'),
     },
@@ -25,7 +25,7 @@ async function bootstrap() {
   // const port = process.env.PORT || 3333;
   await app.listen();
   Logger.log(
-    `🚀 Application is running`
+    `🚀 Application is running at http://localhost:${process.env.PORT || 5000}`
   );
 }
 

@@ -9,6 +9,7 @@
     "build": "nx build",
     "test": "nx test",
     "beServices": "nx run-many --target=serve --projects=cast-grpc-ms,movies-ms,tvshows-ms --parallel --maxParallel=3",
+    "buildBeServices": "nx run-many --target=build --projects=cast-grpc-ms,movies-ms,tvshows-ms --parallel --maxParallel=3",
     "bffServices": "nx run-many --target=serve --projects=cast-gql,gateway-gql --parallel --maxParallel=3"
   },
   "private": true,

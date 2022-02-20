@@ -138,3 +138,8 @@ bootstrap();
 
 
 
+
+# 7
+Added devops and argo
+
+Let's create dockers for each grpc and ms services.
