@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Application
+metadata:
+  name: all-apps
+spec:
+  destination:
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: devops/argo/applications
+    repoURL: 'https://github.com/danduh/tvflix.git'
+    targetRevision: devops/argo
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

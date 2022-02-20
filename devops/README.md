@@ -3,7 +3,7 @@
 ##kubectl 
 https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/
 
-##minikube
+##minikube (for local)
 https://minikube.sigs.k8s.io/docs/start/
 
 ```bash
@@ -23,14 +23,24 @@ minikube dashboard
 
 ```bash
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-UI Password
+**Get UI Password**
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+**Change UI PAssword**
+
+To change the password, edit the `argocd-secret` secret and update the `admin.password` field with a new bcrypt hash. You can use a site like https://www.browserling.com/tools/bcrypt to generate a new hash. For example:
+```bash
+kubectl -n argocd patch secret argocd-secret \
+-p '{"stringData": {
+"admin.password": "$2a$10$BIpNsA2NPC4WeFe.24SSt./UJ85QNUPQPI7wT.nRJtBZlCxq.D4im",
+"admin.passwordMtime": "'$(date +%FT%T%Z)'"
+}}'
+```
 kubectl config set-context --current --namespace=argocd
 
 
