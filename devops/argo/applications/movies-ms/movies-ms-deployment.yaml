@@ -26,6 +26,6 @@ spec:
               value: '5000'
 
           ports:
-            - containerPort: '5000'
+            - containerPort: 5000
 
 
