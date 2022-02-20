@@ -19,13 +19,21 @@ minikube dashboard
 ```
 
 
-## Argo WorkFlow
+## Argo CD
 
 ```bash
 kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 ```
 
 UI Password
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+kubectl config set-context --current --namespace=argocd
+
+
+```bash
+minikube start
 ```
