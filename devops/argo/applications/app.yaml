@@ -15,3 +15,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+
+moviesMs:
+  imageTag: latest
+  port: 5000
+
+branch: 'lessons/part-7'
