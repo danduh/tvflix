@@ -13,4 +13,4 @@ spec:
   source:
     path: devops/argo/applications/movies-ms
     repoURL: https://github.com/danduh/tvflix
-    targetRevision: {{ .Values.branch }}
+    targetRevision: {{ .global.branch }}
