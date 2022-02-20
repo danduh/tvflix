@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tvflix-ui
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: tvflix-ui
+  template:
+    metadata:
+      labels:
+        app: tvflix-ui
+    spec:
+      containers:
+        - image: docker.io/danielostrovsky/tvflix-ui:latest
+          name: tvflix-ui
+          ports:
+            - containerPort: 80
