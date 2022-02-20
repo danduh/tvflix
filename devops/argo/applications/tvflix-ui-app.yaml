@@ -7,10 +7,10 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: argocd
+    namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
     path: devops/argo/applications/tvflix
-    repoURL: https://github.com/danduh/tvflix.git
+    repoURL: https://github.com/danduh/tvflix
     targetRevision: devops/argo
