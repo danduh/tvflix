@@ -81,8 +81,10 @@ helm template $repo/devops/argo/bootstrap/consul-argo/ -f $repo/devops/argo/valu
 argocd app create --file deploy_consul.yaml --upsert
 
 # TODO <machine_ip> = 94.188.131.55
-argocd app set consul -p machine_ip=94.188.131.55
+# argocd app set consul -p machine_ip=94.188.131.55
 
-sed 's/@CONSUL_DNS/94.188.131.55/g' $repo/devops/argo/bootstrap/coredns.yaml > $repo/coredns.yaml
-kubectl apply -f $repo/coredns.yaml
+# sed 's/@CONSUL_DNS/94.188.131.55/g' $repo/devops/argo/bootstrap/coredns.yaml > $repo/coredns.yaml
+# kubectl apply -f $repo/coredns.yaml
 ```
+
+helm template devops/argo/bootstrap/consul-argo/ -f devops/argo/values-onebox.yaml --set platform_branch=argo > deploy_consul.yaml

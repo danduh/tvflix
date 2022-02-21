@@ -1,21 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: consul
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  name: all-apps
 spec:
   destination:
-    namespace: consul
-    server: https://kubernetes.default.svc
+    namespace: default
+    server: 'https://kubernetes.default.svc'
   project: {{ .Values.cluster_name }}
   syncPolicy:
     automated:
       prune: true
   #     selfHeal: false
   source:
-    path: devops/argo/bootstrap/consul-helm
+    path: devops/argo/applications
     repoURL: https://github.com/danduh/tvflix
     targetRevision: {{ .Values.platform_branch }}
     helm:
