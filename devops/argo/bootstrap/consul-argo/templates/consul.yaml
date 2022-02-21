@@ -20,7 +20,7 @@ spec:
     targetRevision: {{ .Values.platform_branch }}
     helm:
       valueFiles:
-        - ../../../values-{{ .Values.cluster_name }}.yaml
+        - ../../values-{{ .Values.cluster_name }}.yaml
       parameters:
         - name: backend_instance
           value: {{ .Values.backend_instance }}
