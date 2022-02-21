@@ -62,7 +62,5 @@ Cons
 
 
 
-# Create OneBox
-argocd proj create -f $repo/devops/argo/bootstrap/onebox-proj.yaml --upsert
 
 

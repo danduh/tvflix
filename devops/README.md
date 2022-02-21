@@ -50,6 +50,7 @@ minikube start
 
 
 # Install HELM
+
 https://helm.sh/docs/intro/install/
 
 Will require sudo password
@@ -60,7 +61,28 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-**Generate deployment yaml**
-helm template $repo/devops/argo/bootstrap/consul-argo/ -f $repo/devops/argo/values-onebox.yaml --set platform_branch='lessons/part-7' > deploy_consul.yaml
+# Create OneBox
 
+
+**Generate deployment for consul**
+
+```shell
+kubectl create namespace consul
+export repo='https://github.com/danduh/tvflix' # our repository
+export PLATFORM_BRANCH='lessons/part-7' # required branch
+
+# Create onebox project in cluster
+argocd proj create -f $repo/devops/argo/bootstrap/onebox-proj.yaml --upsert
+
+#generate deploybble yaml
+helm template $repo/devops/argo/bootstrap/consul-argo/ -f $repo/devops/argo/values-onebox.yaml --set platform_branch=$PLATFORM_BRANCH > deploy_consul.yaml
+
+#create consul-app
 argocd app create --file deploy_consul.yaml --upsert
+
+# TODO <machine_ip> = 94.188.131.55
+argocd app set consul -p machine_ip=94.188.131.55
+
+sed 's/@CONSUL_DNS/94.188.131.55/g' $repo/devops/argo/bootstrap/coredns.yaml > $repo/coredns.yaml
+kubectl apply -f $repo/coredns.yaml
+```
