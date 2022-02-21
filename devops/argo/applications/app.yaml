@@ -11,10 +11,10 @@ spec:
     repoURL: 'https://github.com/danduh/tvflix.git'
     targetRevision:  argo
 
-    helm:
-      valueFiles:
-        - values.yaml
-
+#    helm:
+#      valueFiles:
+#        - values.yaml
+#
 
   project: default
   syncPolicy:
