@@ -9,7 +9,7 @@ spec:
   source:
     path: devops/argo/applications
     repoURL: 'https://github.com/danduh/tvflix.git'
-    targetRevision: 'lessons/part-7'
+    targetRevision:  {{ .Values.platform_branch }}
 
     helm:
       valueFiles:
