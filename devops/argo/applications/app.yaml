@@ -10,16 +10,16 @@ spec:
     path: devops/argo/applications
     repoURL: 'https://github.com/danduh/tvflix.git'
     targetRevision:  argo
-
-#    helm:
-#      valueFiles:
-#        - values.yaml
-#
-
   project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
+
+#    helm:
+#      valueFiles:
+#        - values.yaml
+#
 
 
