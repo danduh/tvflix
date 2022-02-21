@@ -47,3 +47,20 @@ kubectl config set-context --current --namespace=argocd
 ```bash
 minikube start
 ```
+
+
+# Install HELM
+https://helm.sh/docs/intro/install/
+
+Will require sudo password
+
+```shell
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+**Generate deployment yaml**
+helm template $repo/devops/argo/bootstrap/consul-argo/ -f $repo/devops/argo/values-onebox.yaml --set platform_branch='lessons/part-7' > deploy_consul.yaml
+
+argocd app create --file deploy_consul.yaml --upsert

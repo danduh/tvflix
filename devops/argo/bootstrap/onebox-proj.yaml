@@ -1,0 +1,27 @@
+metadata:
+  name: onebox
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Onebox environment for RND
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - "*"
+  roles:
+  - description: All permissions
+    jwtTokens:
+      - iat: 1644232019
+        id: "1"
+    name: All
+    policies:
+    - p, proj:onebox:All, applications, *, onebox/*, allow
+status:
+  jwtTokensByRole:
+    All:      
+      items:      
+      - iat: 1644232019
+        id: "1"
