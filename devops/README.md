@@ -72,10 +72,10 @@ export repo='https://github.com/danduh/tvflix' # our repository
 export PLATFORM_BRANCH='lessons/part-7' # required branch
 
 # Create onebox project in cluster
-argocd proj create -f $repo/devops/argo/bootstrap/onebox-proj.yaml --upsert
+#argocd proj create -f $repo/devops/argo/bootstrap/onebox-proj.yaml --upsert
 
 #generate deploybble yaml
-helm template $repo/devops/argo/bootstrap/consul-argo/ -f $repo/devops/argo/values-onebox.yaml --set platform_branch=$PLATFORM_BRANCH > deploy_consul.yaml
+helm template $repo/devops/argo/bootstrap/all-apps/ --set platform_branch=$PLATFORM_BRANCH > deploy_consul.yaml
 
 #create consul-app
 argocd app create --file deploy_consul.yaml --upsert

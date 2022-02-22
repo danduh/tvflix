@@ -17,7 +17,7 @@ spec:
     targetRevision: {{ .Values.platform_branch }}
     helm:
       valueFiles:
-        - ../values-{{ .Values.cluster_name }}.yaml
+        - ../core-values.yaml
       parameters:
         - name: platform_branch
           value: {{ .Values.platform_branch }}
