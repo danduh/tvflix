@@ -17,9 +17,3 @@ spec:
       selfHeal: true
 
 
-#    helm:
-#      valueFiles:
-#        - values.yaml
-#
-
-

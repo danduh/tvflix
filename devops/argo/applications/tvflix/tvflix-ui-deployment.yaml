@@ -13,10 +13,6 @@ spec:
       labels:
         app: tvflix-ui
     spec:
-      syncPolicy:
-        automated:
-          prune: true
-
       containers:
         - image: docker.io/danielostrovsky/tvflix-ui:latest
           name: tvflix-ui

@@ -13,9 +13,6 @@ spec:
       labels:
         app: movies-ms
     spec:
-      syncPolicy:
-        automated:
-          prune: true
       containers:
         - image: docker.io/danielostrovsky/be-service:latest
           name: movies-ms
