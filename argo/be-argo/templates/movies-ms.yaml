@@ -17,7 +17,7 @@ spec:
   source:
     path: argo/be-charts/movies-ms
     repoURL: https://github.com/danduh/tvflix
-    targetRevision: {{ .Values.branch }}
+    targetRevision: {{ .Values.platform_pranch }}
     helm:
       valueFiles:
         - ../../values-{{ .Values.cluster_name }}.yaml
