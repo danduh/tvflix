@@ -88,3 +88,79 @@ argocd app create --file deploy_consul.yaml --upsert
 ```
 
 helm template devops/argo/bootstrap/consul-argo/ -f devops/argo/values-onebox.yaml --set platform_branch=argo > deploy_consul.yaml
+
+
+## Adding a new Application/Services or set of applications
+
+ - Add template to `argo/be-argo/templates`
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <APPLICATIONS SET NAME>
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+
+  source:
+    path: argo/be-charts/<APPLICATIONS SET NAME>
+    repoURL: https://github.com/danduh/tvflix
+    targetRevision: {{ .Values.platform_branch }}
+    helm:
+      valueFiles:
+        - ../../values-{{ .Values.cluster_name }}.yaml
+
+```
+- Create folder in `argo/be-charts/<APPLICATIONS SET NAME>`
+  - `templates`
+    - `<ApplicationNAme>.yaml`
+  - `Charts.yaml`
+  - `values.yaml`
+
+
+_ApplicationName.yaml_
+
+```yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <ApplicationName>
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: <ApplicationName>
+  template:
+    metadata:
+      labels:
+        app: <ApplicationName>
+    spec:
+      containers:
+        - image: docker.io/danielostrovsky/tvflix-ui:latest
+          name: <ApplicationName>
+          ports:
+            - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: <ApplicationName>
+spec:
+  ports:
+    - port: 8099
+      targetPort: 80
+  selector:
+    app: <ApplicationName>
+
+```
