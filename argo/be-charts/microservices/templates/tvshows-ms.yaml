@@ -23,10 +23,10 @@ spec:
             - name: SERVICE_NAME
               value: 'tvshows-ms'
             - name: PORT
-              value: '5001'
+              value: {{ .Values.msServices.tvshowsMs.port }}
 
           ports:
-            - containerPort: 5001
+            - containerPort: {{ .Values.msServices.tvshowsMs.port }}
 
 
 ---
@@ -36,7 +36,7 @@ metadata:
   name: tvshows-ms
 spec:
   ports:
-    - port: 5001
-      targetPort: 5001
+    - port: {{ .Values.msServices.tvshowsMs.port }}
+      targetPort: {{ .Values.msServices.tvshowsMs.port }}
   selector:
     app: tvshows-ms

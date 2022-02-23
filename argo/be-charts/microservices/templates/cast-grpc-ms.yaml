@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movies-ms
+  name: cast-grpc-ms
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: movies-ms
+      app: cast-grpc-ms
   template:
     metadata:
       labels:
-        app: movies-ms
+        app: cast-grpc-ms
     spec:
       containers:
         - image: docker.io/danielostrovsky/be-service:{{ .Values.msServices.imageTag }}
-          name: movies-ms
+          name: cast-grpc-ms
 #          imagePullPolicy: Always
           env:
             - name: discovery.type
               value: 'single-node'
             - name: SERVICE_NAME
-              value: 'movies-ms'
+              value: 'cast-grpc-ms'
             - name: PORT
-              value: {{ .Values.msServices.moviesMs.port }}
+              value: {{ .Values.msServices.castGrpcMs.port }}
           ports:
-            - containerPort: {{ .Values.msServices.moviesMs.port }}
+            - containerPort: {{ .Values.msServices.castGrpcMs.port }}
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: movies-ms
+  name: cast-grpc-ms
 spec:
   ports:
-    - port: {{ .Values.msServices.moviesMs.port }}
-      targetPort: {{ .Values.msServices.moviesMs.port }}
+    - port: {{ .Values.msServices.castGrpcMs.port }}
+      targetPort: {{ .Values.msServices.castGrpcMs.port }}
   selector:
-    app: movies-ms
+    app: cast-grpc-ms
 

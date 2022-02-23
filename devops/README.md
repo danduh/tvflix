@@ -149,8 +149,6 @@ spec:
           name: <ApplicationName>
           ports:
             - containerPort: 80
-
-
 ---
 apiVersion: v1
 kind: Service
@@ -164,3 +162,11 @@ spec:
     app: <ApplicationName>
 
 ```
+
+## PORTs
+
+| Service Name | PORT | required |   |   |
+|--------------|------|----------|---|---|
+| cast-grpc-ms | 5000 | Yes      |   |   |
+| movies-ms    | 5100 | Yes      |   |   |
+| tvshows-ms   | 5101 | Yes      |   |   |

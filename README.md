@@ -1,4 +1,12 @@
 
+# PORTS for local run
+
+| Service Name | PORT | required |   |   |
+|--------------|------|----------|---|---|
+| cast-grpc-ms | 5000 | Yes      |   |   |
+| movies-ms    | 5100 | Yes      |   |   |
+| tvshows-ms   | 5101 | Yes      |   |   |
+
 
 # Tvflix
 

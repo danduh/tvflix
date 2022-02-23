@@ -1,2 +1,8 @@
 msServices:
   imageTag: latest
+  moviesMs:
+    port: 5100
+  tvshowsMs:
+    port: 5101
+  castGrpcMs:
+    port: 5000
