@@ -5,4 +5,4 @@ msServices:
   tvshowsMs:
     port: '5101'
   castGrpcMs:
-    port: '5000'
+    port: 5000

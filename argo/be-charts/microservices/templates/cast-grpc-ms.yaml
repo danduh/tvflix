@@ -23,7 +23,7 @@ spec:
             - name: SERVICE_NAME
               value: 'cast-grpc-ms'
             - name: PORT
-              value: {{ .Values.msServices.castGrpcMs.port }}
+              value: {{ .Values.msServices.castGrpcMs.port | quote }}
           ports:
             - containerPort: {{ .Values.msServices.castGrpcMs.port }}
 
