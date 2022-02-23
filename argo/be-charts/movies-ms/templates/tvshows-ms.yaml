@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tvshows-ms
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: tvshows-ms
+  template:
+    metadata:
+      labels:
+        app: tvshows-ms
+    spec:
+      containers:
+        - image: docker.io/danielostrovsky/be-service:{{ .Values.msServices.imageTag }}
+          name: tvshows-ms
+#          imagePullPolicy: Always
+          env:
+            - name: discovery.type
+              value: 'single-node'
+            - name: SERVICE_NAME
+              value: 'tvshows-ms'
+            - name: PORT
+              value: '5001'
+
+          ports:
+            - containerPort: 5001
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tvshows-ms
+spec:
+  ports:
+    - port: 5001
+      targetPort: 5001
+  selector:
+    app: tvshows-ms
