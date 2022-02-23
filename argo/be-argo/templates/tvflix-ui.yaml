@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tvshows-ms
+  name: tvflix-ui
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -15,6 +15,10 @@ spec:
       prune: true
 
   source:
-    path: devops/argo/applications/tvshows-ms
+    path: argo/be-charts/tvflix-ui
     repoURL: https://github.com/danduh/tvflix
-    targetRevision: argo
+    targetRevision: {{ .Values.platform_branch }}
+    helm:
+      valueFiles:
+        - ../../values-{{ .Values.cluster_name }}.yaml
+
