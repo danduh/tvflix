@@ -23,7 +23,7 @@ spec:
             - name: SERVICE_NAME
               value: 'tvshows-ms'
             - name: PORT
-              value: {{ .Values.msServices.tvshowsMs.port }}
+              value: {{ .Values.msServices.tvshowsMs.port  | quote }}
 
           ports:
             - containerPort: {{ .Values.msServices.tvshowsMs.port }}
