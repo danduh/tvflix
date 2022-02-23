@@ -14,7 +14,7 @@ spec:
         app: movies-ms
     spec:
       containers:
-        - image: docker.io/danielostrovsky/be-service:latest
+        - image: docker.io/danielostrovsky/be-service:{{ .Values.msServices.imageTag }}
           name: movies-ms
 #          imagePullPolicy: Always
           env:
