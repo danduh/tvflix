@@ -23,9 +23,9 @@ spec:
             - name: SERVICE_NAME
               value: 'cast-gql'
             - name: PORT
-              value: {{ .Values.gqlServices.castGrpcMs.port | quote }}
+              value: {{ .Values.gqlServices.castGql.port | quote }}
           ports:
-            - containerPort: {{ .Values.gqlServices.castGrpcMs.port }}
+            - containerPort: {{ .Values.gqlServices.castGql.port }}
 
 ---
 apiVersion: v1
@@ -34,8 +34,8 @@ metadata:
   name: cast-gql
 spec:
   ports:
-    - port: {{ .Values.gqlServices.castGrpcMs.port }}
-      targetPort: {{ .Values.gqlServices.castGrpcMs.port }}
+    - port: {{ .Values.gqlServices.castGql.port }}
+      targetPort: {{ .Values.gqlServices.castGql.port }}
   selector:
     app: cast-gql
 
