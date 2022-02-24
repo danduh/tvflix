@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-gql
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: gateway-gql
+  template:
+    metadata:
+      labels:
+        app: gateway-gql
+    spec:
+      containers:
+        - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
+          name: gateway-gql
+#          imagePullPolicy: Always
+          env:
+            - name: discovery.type
+              value: 'single-node'
+            - name: SERVICE_NAME
+              value: 'gateway-gql'
+            - name: PORT
+              value: {{ .Values.gqlServices.gateway.port  | quote }}
+          ports:
+            - containerPort: {{ .Values.gqlServices.gateway.port }}
+              -
+        - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
+          name: cast-gql
+          #          imagePullPolicy: Always
+          env:
+            - name: discovery.type
+              value: 'single-node'
+            - name: SERVICE_NAME
+              value: 'cast-gql'
+            - name: PORT
+              value: {{ .Values.gqlServices.castGql.port | quote }}
+          ports:
+            - containerPort: {{ .Values.gqlServices.castGql.port }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-gql
+spec:
+  ports:
+    - port: {{ .Values.gqlServices.gateway.port }}
+      targetPort: {{ .Values.gqlServices.gateway.port }}
+  selector:
+    app: gateway-gql
+
