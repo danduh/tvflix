@@ -10,11 +10,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN CYPRESS_INSTALL_BINARY=0 npm i --cilent --no-audit
-RUN npm rebuild grpc --force
 
 COPY . .
 
-RUN npm run buildBeServices
+RUN npm run buildBffServices
 
 ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV

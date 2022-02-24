@@ -1,8 +1,16 @@
 msServices:
-  imageTag: latest
+  imageTag: 0.0.1
   moviesMs:
     port: 5100
   tvshowsMs:
     port: 5101
   castGrpcMs:
     port: 5000
+
+gqlServices:
+  imageTag: 0.0.1
+  gateway:
+    port: 3000
+  castGql:
+    port: 3001
+

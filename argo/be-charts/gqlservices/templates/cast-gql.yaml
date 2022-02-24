@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cast-gql
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: cast-gql
+  template:
+    metadata:
+      labels:
+        app: cast-gql
+    spec:
+      containers:
+        - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
+          name: cast-gql
+#          imagePullPolicy: Always
+          env:
+            - name: discovery.type
+              value: 'single-node'
+            - name: SERVICE_NAME
+              value: 'cast-gql'
+            - name: PORT
+              value: {{ .Values.gqlServices.castGrpcMs.port | quote }}
+          ports:
+            - containerPort: {{ .Values.gqlServices.castGrpcMs.port }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cast-gql
+spec:
+  ports:
+    - port: {{ .Values.gqlServices.castGrpcMs.port }}
+      targetPort: {{ .Values.gqlServices.castGrpcMs.port }}
+  selector:
+    app: cast-gql
+

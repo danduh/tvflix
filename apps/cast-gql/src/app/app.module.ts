@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { GraphQLFederationModule } from '@nestjs/graphql';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloFederationDriver } from '@nestjs/apollo';
 
 import { AppService } from './app.service';
 import { join } from "path";
@@ -8,12 +9,12 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
 
 @Module({
   imports: [
-    GraphQLFederationModule.forRootAsync({
+    GraphQLModule.forRootAsync({
+      driver: ApolloFederationDriver,
       useFactory: () => ({
+        playground:true,
+        introspection: true,
         autoSchemaFile: join(process.cwd(), 'apps/cast-gql/src/schema.gql'),
-        // context: (context) => {
-        //   return context;
-        // },
         buildSchemaOptions: { orphanedTypes: [] }
       })
     }),
@@ -27,10 +28,7 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
           },
           url: 'localhost:5000',
           package: 'cast',
-          protoPath: join(
-            __dirname,
-            '../cast-grpc-ms/assets/proto/cast.proto'
-          ),
+          protoPath: join(__dirname, 'assets/proto/cast.proto'),
         },
       },
     ]),

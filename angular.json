@@ -13,7 +13,14 @@
             "outputPath": "dist/apps/cast-gql",
             "main": "apps/cast-gql/src/main.ts",
             "tsConfig": "apps/cast-gql/tsconfig.app.json",
-            "assets": ["apps/cast-gql/src/assets"]
+            "assets": [
+              "apps/cast-gql/src/assets",
+              {
+                "glob": "**/*",
+                "input": "apps/cast-grpc-ms/src/assets/proto",
+                "output": "assets/proto"
+              }
+            ]
           },
           "configurations": {
             "production": {

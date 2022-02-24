@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
-import { GatewayModuleOptions, GraphQLGatewayModule } from "@nestjs/graphql";
+import {  GraphQLModule } from "@nestjs/graphql";
+import {  ApolloGatewayDriverConfig, ApolloGatewayDriver } from "@nestjs/apollo";
 import { IntrospectAndCompose } from "@apollo/gateway";
 
 @Module({
   providers: [],
   imports: [
-    GraphQLGatewayModule.forRootAsync({
-      useFactory: async (): Promise<GatewayModuleOptions> => {
+    GraphQLModule.forRootAsync({
+      driver:ApolloGatewayDriver,
+      useFactory: async (): Promise<any> => {
         return {
+          playground:true,
+          introspection: true,
           server: {
             formatResponse(response, requestContext) {
               return response;
@@ -21,7 +25,6 @@ import { IntrospectAndCompose } from "@apollo/gateway";
                 { name: 'person', url: 'http://localhost:3001/graphql' }
               ]
             }),
-
             pollIntervalInMs: 3000,
           }
         };
