@@ -33,9 +33,15 @@ kind: Service
 metadata:
   name: cast-gql
 spec:
+  type: NodePort
+  externalTrafficPolicy: Cluster
+
   ports:
     - port: {{ .Values.gqlServices.castGql.port }}
       targetPort: {{ .Values.gqlServices.castGql.port }}
+      protocol: TCP
+      name: cast-gql
+
   selector:
     app: cast-gql
 
