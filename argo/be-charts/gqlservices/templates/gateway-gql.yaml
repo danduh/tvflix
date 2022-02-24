@@ -14,7 +14,7 @@ spec:
         app: gateway-gql
     spec:
       containers:
-        - image: docker.io/danielostrovsky/be-service:{{ .Values.gqlServices.imageTag }}
+        - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
           name: gateway-gql
 #          imagePullPolicy: Always
           env:
