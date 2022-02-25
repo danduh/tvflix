@@ -37,6 +37,8 @@ spec:
               value: 'cast-gql'
             - name: PORT
               value: {{ .Values.gqlServices.castGql.port | quote }}
+            - name: GRPC_CAST_URL
+              value: 'default.cast-grpc-ms'
           ports:
             - containerPort: {{ .Values.gqlServices.castGql.port }}
 

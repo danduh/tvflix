@@ -7,6 +7,8 @@ import { join } from "path";
 import { PersonResolver } from "../person/person.resolver";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 
+const castGrpcUrl = process.env.GRPC_CAST_URL || 'localhost'
+
 @Module({
   imports: [
     GraphQLModule.forRootAsync({
@@ -26,7 +28,7 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
           loader: {
             keepCase: false,
           },
-          url: 'localhost:5000',
+          url: `${castGrpcUrl}:5000`,
           package: 'cast',
           protoPath: join(__dirname, 'assets/proto/cast.proto'),
         },

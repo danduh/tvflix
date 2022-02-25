@@ -1,5 +1,5 @@
 msServices:
-  imageTag: 0.0.1
+  imageTag: 0.0.2
   moviesMs:
     port: 5100
   tvshowsMs:
