@@ -8,7 +8,8 @@ import { PersonResolver } from "../person/person.resolver";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 
 const castGrpcService = process.env.GRPC_CAST_URL || 'localhost'
-const castGrpcUrl = `${castGrpcService}:${process.env.PORT || '5000'}`
+const castGrpcUrl = `${castGrpcService}:5000`
+// const castGrpcUrl = `${castGrpcService}:${process.env.PORT || '5000'}`
 console.log('castGrpcUrl', castGrpcUrl);
 
 @Module({
