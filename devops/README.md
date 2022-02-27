@@ -43,11 +43,14 @@ kubectl -n argocd patch secret argocd-secret \
 ```
 kubectl config set-context --current --namespace=argocd
 
-
 ```bash
 minikube start
 ```
 
+Forword port
+```shell
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
 
 # Install HELM
 

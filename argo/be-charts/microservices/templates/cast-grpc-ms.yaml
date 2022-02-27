@@ -35,7 +35,7 @@ metadata:
 spec:
   ports:
     - port: {{ .Values.msServices.castGrpcMs.port }}
-      targetPort: {{ .Values.msServices.castGrpcMs.port }}
+      targetPort:  Ms.port }}
   selector:
     app: cast-grpc-ms
 
