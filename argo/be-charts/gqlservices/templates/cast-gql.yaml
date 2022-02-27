@@ -22,6 +22,8 @@ spec:
               value: 'single-node'
             - name: SERVICE_NAME
               value: 'cast-gql'
+            - name: GRPC_CAST_URL
+              value: 'cast-grpc-ms'
             - name: PORT
               value: {{ .Values.gqlServices.castGql.port | quote }}
           ports:
