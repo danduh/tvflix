@@ -7,14 +7,16 @@ import { join } from "path";
 import { PersonResolver } from "../person/person.resolver";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 
-const castGrpcUrl = process.env.GRPC_CAST_URL || 'localhost'
+const castGrpcService = process.env.GRPC_CAST_URL || 'localhost'
+const castGrpcUrl = `${castGrpcService}:${process.env.PORT || '5000'}`
+console.log('castGrpcUrl', castGrpcUrl);
 
 @Module({
   imports: [
     GraphQLModule.forRootAsync({
       driver: ApolloFederationDriver,
       useFactory: () => ({
-        playground:true,
+        playground: true,
         introspection: true,
         autoSchemaFile: join(process.cwd(), 'apps/cast-gql/src/schema.gql'),
         buildSchemaOptions: { orphanedTypes: [] }
@@ -28,7 +30,7 @@ const castGrpcUrl = process.env.GRPC_CAST_URL || 'localhost'
           loader: {
             keepCase: false,
           },
-          url: `${castGrpcUrl}:5000`,
+          url: castGrpcUrl,
           package: 'cast',
           protoPath: join(__dirname, 'assets/proto/cast.proto'),
         },
