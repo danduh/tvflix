@@ -77,7 +77,7 @@ export PLATFORM_BRANCH='lessons/part-7' # required branch
 #argocd proj create -f $repo/devops/argo/bootstrap/onebox-proj.yaml --upsert
 
 # generate deploybble yaml local
-helm template argo/be-argo --set platform_branch=argo > deploy_consul.yaml
+ helm template argo/be-argo --set platform_branch=argo --set cluster_name=staging > deploy_consul.yaml
 
 #generate deploybble yaml against repo
 helm template $repo/argo/be-argo --set platform_branch=$PLATFORM_BRANCH > deploy_consul.yaml
