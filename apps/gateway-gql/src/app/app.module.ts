@@ -9,7 +9,8 @@ import * as path from "path";
 const subNodes = {
   person: () => {
     try {
-      fs.readFileSync(path.join(__dirname, '../gql-config.json',))
+      const config = fs.readFileSync(path.join(__dirname, '../gql-config.json'), 'utf-8')
+      console.log(config);
     } catch (e) {
       console.error(e)
     }

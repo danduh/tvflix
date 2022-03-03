@@ -14,19 +14,9 @@ spec:
         app: gateway-gql
     spec:
       volumes:
-#        - name: logz
-#          hostPath:
-#            path: /var/log/clusterlogs/opc
-#        - name: upstream-conf
-#          configMap:
-#            name: upstream-conf
         - name: gql-config
           configMap:
             name: gql-config
-#        - name: tmp-dir
-#          emptyDir:
-#            medium: Memory
-#            sizeLimit: 100Mi
       containers:
         - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
           name: gateway-gql
