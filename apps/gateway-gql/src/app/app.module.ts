@@ -2,9 +2,17 @@ import {Module} from '@nestjs/common';
 import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloGatewayDriverConfig, ApolloGatewayDriver} from "@nestjs/apollo";
 import {IntrospectAndCompose} from "@apollo/gateway";
+import * as fs from "fs";
+import * as path from "path";
+
 
 const subNodes = {
   person: () => {
+    try {
+      fs.readFileSync(path.join(__dirname, '../gql-config.json',))
+    } catch (e) {
+      console.error(e)
+    }
     console.log(process.env);
     return 'http://localhost:3001/graphql'
   }

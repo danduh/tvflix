@@ -17,6 +17,10 @@ spec:
         - image: docker.io/danielostrovsky/gql-services:{{ .Values.gqlServices.imageTag }}
           name: gateway-gql
 #          imagePullPolicy: Always
+          volumeMounts:
+            - name: gcl-config
+              mountPath: /usr/src/app/dist/apps/gql-config.json
+              subPath: gql-config.json
           env:
             - name: discovery.type
               value: 'single-node'

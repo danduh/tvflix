@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcl-config
+  namespace: default
+data:
+  gql-config.json: |
+    {
+      subgraphs: [
+        { name: 'person', url: 'http://cast-gql:{{ .Values.gqlServices.castGql.port }}' }
+      ]
+    }
