@@ -41,3 +41,11 @@ spec:
   selector:
     app: gateway-gql
 
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-gql-services
+data:
+  castGql: 'cast'
