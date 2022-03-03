@@ -32,7 +32,7 @@ spec:
                   # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
                   name: gateway-gql-services
                   # Specify the key associated with the value
-                  key: special.how
+                  key: castGql
 
           ports:
             - containerPort: {{ .Values.gqlServices.gateway.port }}
