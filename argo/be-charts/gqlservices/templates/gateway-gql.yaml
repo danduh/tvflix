@@ -26,6 +26,14 @@ spec:
               value: 'cast-grpc-ms'
             - name: PORT
               value: {{ .Values.gqlServices.gateway.port  | quote }}
+            - name: SUB_NODES
+              valueFrom:
+                configMapKeyRef:
+                  # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+                  name: gateway-gql-services
+                  # Specify the key associated with the value
+                  key: special.how
+
           ports:
             - containerPort: {{ .Values.gqlServices.gateway.port }}
 
@@ -49,3 +57,8 @@ metadata:
   name: gateway-gql-services
 data:
   castGql: 'cast'
+  ui.properties: |
+    color.good=purple
+    color.bad=yellow
+    allow.textmode=true
+    how.nice.to.look=fairlyNice
