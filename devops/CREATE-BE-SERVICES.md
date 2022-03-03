@@ -73,5 +73,5 @@ Cons
 
 
 
-docker build -t danielostrovsky/gql-services:0.0.3 -f devops/dockers/gql-services.Dockerfile .
+docker build -t danielostrovsky/gql-services:0.0.5 -f devops/dockers/gql-services.Dockerfile .
 

@@ -1,16 +1,24 @@
-import { Module } from '@nestjs/common';
-import {  GraphQLModule } from "@nestjs/graphql";
-import {  ApolloGatewayDriverConfig, ApolloGatewayDriver } from "@nestjs/apollo";
-import { IntrospectAndCompose } from "@apollo/gateway";
+import {Module} from '@nestjs/common';
+import {GraphQLModule} from "@nestjs/graphql";
+import {ApolloGatewayDriverConfig, ApolloGatewayDriver} from "@nestjs/apollo";
+import {IntrospectAndCompose} from "@apollo/gateway";
+
+const subNodes = {
+  person: () => {
+    console.log(process.env);
+    return 'http://localhost:3001/graphql'
+  }
+}
+
 
 @Module({
   providers: [],
   imports: [
     GraphQLModule.forRootAsync({
-      driver:ApolloGatewayDriver,
+      driver: ApolloGatewayDriver,
       useFactory: async (): Promise<any> => {
         return {
-          playground:true,
+          playground: true,
           introspection: true,
           server: {
             formatResponse(response, requestContext) {
@@ -22,7 +30,7 @@ import { IntrospectAndCompose } from "@apollo/gateway";
             supergraphSdl: new IntrospectAndCompose({
               subgraphs: [
                 // Into this list we will add all our subGraphs.
-                { name: 'person', url: 'http://localhost:3001/graphql' }
+                {name: 'person', url: subNodes.person()}
               ]
             }),
             pollIntervalInMs: 3000,

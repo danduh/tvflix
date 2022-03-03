@@ -1,4 +1,7 @@
-FROM node:14-alpine
+FROM node:16-alpine3.15
+
+RUN apk --no-cache add --virtual .builds-deps build-base python3
+
 ARG SERVICE_NAME=''
 ENV SERVICE_NAME=$SERVICE_NAME
 
@@ -9,7 +12,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN CYPRESS_INSTALL_BINARY=0 npm i --cilent --no-audit
+RUN CYPRESS_INSTALL_BINARY=0 npm i --cilent --no-audit --ignore-scripts
 
 COPY . .
 

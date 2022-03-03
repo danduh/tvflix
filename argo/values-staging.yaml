@@ -8,7 +8,7 @@ msServices:
     port: 5000
 
 gqlServices:
-  imageTag: 0.0.4
+  imageTag: 0.0.5
   gateway:
     port: 3000
   castGql:
