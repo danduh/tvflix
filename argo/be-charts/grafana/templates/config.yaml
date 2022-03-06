@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+data:
+  service.grafana: |
+    apiUrl: https://danduh.grafana.net/api
+    apiKey: eyJrIjoialdkQ1pORm9ZUlVzQktBSDdiWlAxNlJiRjJoWHZmT3QiLCJuIjoiQXJnb0NEIE5vdGlmaWNhdGlvbiIsImlkIjoxfQ==
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-secret
+stringData:
+  grafana-api-key: api-key
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+#    notifications.argoproj.io/subscribe.<trigger-name>.grafana: tag1|tag2 # list of tags separated with |
+    recipients.argocd-notifications.argoproj.io: email:danduh@gmail.com
