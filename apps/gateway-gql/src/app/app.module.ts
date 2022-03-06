@@ -5,18 +5,22 @@ import {IntrospectAndCompose} from "@apollo/gateway";
 import * as fs from "fs";
 import * as path from "path";
 
+interface SharedConfig {
+  subgraphs: { name: string, url: string }[]
+}
 
-const subNodes = {
-  person: () => {
-    try {
-      const config = fs.readFileSync(path.join(__dirname, '../gql-config.json'), 'utf-8')
-      console.log(config);
-    } catch (e) {
-      console.error(e)
-    }
-    console.log(process.env);
-    return 'http://localhost:3001/graphql'
+const defaultConfig: SharedConfig = {subgraphs: [{name: 'person', url: 'http://localhost:3001/graphql'}]}
+
+const getSharedConfig = () => {
+  try {
+    const config: SharedConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../gql-config.json'), 'utf-8'))
+    console.log(config);
+    return config.subgraphs
+  } catch (e) {
+    console.error(e)
   }
+  console.log(process.env);
+  return defaultConfig.subgraphs
 }
 
 
@@ -37,10 +41,7 @@ const subNodes = {
           },
           gateway: {
             supergraphSdl: new IntrospectAndCompose({
-              subgraphs: [
-                // Into this list we will add all our subGraphs.
-                {name: 'person', url: subNodes.person()}
-              ]
+              subgraphs: getSharedConfig()
             }),
             pollIntervalInMs: 3000,
           }
