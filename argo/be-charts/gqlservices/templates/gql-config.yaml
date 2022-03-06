@@ -7,6 +7,6 @@ data:
   gql-config.json: |
     {
       "subgraphs": [
-        { "name": "person", "url": "http://cast-gql:{{ .Values.gqlServices.castGql.port }}" }
+        { "name": "person", "url": "http://cast-gql:{{ .Values.gqlServices.castGql.port }}/graphql" }
       ]
     }
